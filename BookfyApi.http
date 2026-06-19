@@ -1,0 +1,6 @@
+@BookfyApi_HostAddress = http://localhost:5187
+
+GET {{BookfyApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
