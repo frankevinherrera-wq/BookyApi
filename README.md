@@ -13,7 +13,13 @@ El proyecto maneja una relación de **Uno a Muchos (1:N)**:
 * **Libro:** Cada libro pertenece obligatoriamente a un autor.
 
 ##  Como ejecutar localmente
-1. Clonar el repositorio.
-2. Ejecutar las migraciones para crear la base de datos local:
+1. Antes de ejecutar el proyecto, necesitas tener instalada la herramienta global de Entity Framework Core en tu sistema operativo para poder gestionar las migraciones de la base de datos:
+2. Clonar el repositorio.
+3. Ejecutar las migraciones para crear la base de datos local:
 ```bash
    dotnet ef database update
+## 🛠️ Requisitos previos
+
+
+
+```
