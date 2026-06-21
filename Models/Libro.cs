@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BookfyApi.models
+namespace BookfyApi.Models
 {
     public class Libro
     {
