@@ -4,3 +4,5 @@ GET {{BookfyApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET {{BookfyApi_HostAddress}}/api/autores
+Accept: application/json

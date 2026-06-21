@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BookfyApi.Data;   // <-- ESTA LÍNEA ES CRUCIAL (con la D mayúscula)
-using BookfyApi.Models; // <-- Para que encuentre a Autor y Libro// <-- Y esta también/ Apuntamos a la nueva ubicación del modelo Autor
+using BookfyApi.Data;  
+using BookfyApi.Models; 
 
 namespace BookfyApi.Controllers;
 
@@ -16,14 +16,13 @@ public class AutoresController : ControllerBase
         _context = context;
     }
 
-    // 1. GET: api/autores (Listar todos)
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Autor>>> GetAutores()
     {
+
         return await _context.Autores.ToListAsync();
     }
 
-    // 2. GET: api/autores/5 (Obtener uno solo por ID)
     [HttpGet("{id}")]
     public async Task<ActionResult<Autor>> GetAutor(int id)
     {
@@ -37,19 +36,15 @@ public class AutoresController : ControllerBase
         return autor;
     }
 
-    // 3. POST: api/autores (Crear nuevo autor)
     [HttpPost]
     public async Task<ActionResult<Autor>> PostAutor(Autor autor)
     {
-        // El [ApiController] valida automáticamente los Data Annotations antes de entrar aquí
         _context.Autores.Add(autor);
         await _context.SaveChangesAsync();
 
-        // Devuelve un código 201 Created y la URL para consultar el nuevo recurso
         return CreatedAtAction(nameof(GetAutor), new { id = autor.Id }, autor);
     }
 
-    // 4. PUT: api/autores/5 (Actualizar autor existente)
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAutor(int id, Autor autor)
     {
@@ -58,7 +53,6 @@ public class AutoresController : ControllerBase
             return BadRequest(new { mensaje = "El ID del parámetro no coincide con el del cuerpo." });
         }
 
-        // Le avisamos a Entity Framework que el objeto fue modificado
         _context.Entry(autor).State = EntityState.Modified;
 
         try
@@ -74,6 +68,22 @@ public class AutoresController : ControllerBase
             throw;
         }
 
-        return NoContent(); // Código 204 (Se actualizó con éxito, no devuelve contenido)
+        return NoContent(); 
+    }
+
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<Autor>> DeleteAutor(int id)
+    {
+        var autor = await _context.Autores.FindAsync(id);
+        if (autor == null)
+        {
+            return NotFound(new { mensaje = "El autor a eliminar no existe." });
+        }
+
+        _context.Autores.Remove(autor);
+        await _context.SaveChangesAsync();
+
+        return autor; 
     }
 }

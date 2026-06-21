@@ -18,7 +18,6 @@ El proyecto maneja una relación de **Uno a Muchos (1:N)**:
 3. Ejecutar las migraciones para crear la base de datos local:
 ```bash
    dotnet ef database update
-## 🛠️ Requisitos previos
 
 
 
