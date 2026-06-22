@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-
 using BookfyApi.Data;
 using BookfyApi.Models;
+using BookfyApi.DTOs;
 
 namespace BookfyApi.Controllers
 {
-    [Route("[controller]")]
-    public class LibrosController : Controller
+    [ApiController] 
+    [Route("api/[controller]")]
+    public class LibrosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
@@ -23,61 +18,92 @@ namespace BookfyApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Libro>>> GetLibros()
+        public async Task<ActionResult<IEnumerable<LibroDto>>> GetLibros()
         {
-            return await _context.Libros.ToListAsync();
+            return await _context.Libros
+                .Include(l => l.Autor) 
+                .Select(libro => new LibroDto
+                {
+                    Titulo = libro.Titulo,
+                    AnioPublicacion = libro.AnioPublicacion,
+                    Autor = new AutorDto // Transforma la relación en un DTO limpio
+                    {
+                        Nombre = libro.Autor != null ? libro.Autor.Nombre : "Sin Autor",
+                        Nacionalidad = libro.Autor != null ? libro.Autor.Nacionalidad : "Desconocida"
+                    }
+                }).ToListAsync();
         }
 
-
         [HttpGet("{id}")]
-        public async Task<ActionResult<Libro>> GetLibro(int id)
+        public async Task<ActionResult<LibroDto>> GetLibro(int id)
         {
-            var libro = await _context.Libros.FindAsync(id);
+            var libro = await _context.Libros
+                .Include(l => l.Autor)
+                .FirstOrDefaultAsync(l => l.Id == id);
 
             if (libro == null)
             {
                 return NotFound(new { mensaje = "El libro no existe." });
             }
 
-            return libro;
+            return new LibroDto
+            {
+                Titulo = libro.Titulo,
+                AnioPublicacion = libro.AnioPublicacion,
+                Autor = new AutorDto
+                {
+                    Nombre = libro.Autor != null ? libro.Autor.Nombre : "Sin Autor",
+                    Nacionalidad = libro.Autor != null ? libro.Autor.Nacionalidad : "Desconocida"
+                }
+            };
         }
 
         [HttpPost]
-        public async Task<ActionResult<Libro>> PostLibro(Libro libro)
+        public async Task<ActionResult<LibroDto>> PostLibro(LibroDto libroDto)
         {
+            var autorExiste = await _context.Autores.AnyAsync(a => a.Id == libroDto.AutorId);
+            if (!autorExiste)
+            {
+                return BadRequest(new { mensaje = "El AutorId proporcionado no existe." });
+            }
+
+            var libro = new Libro
+            {
+                Titulo = libroDto.Titulo,
+                AnioPublicacion = libroDto.AnioPublicacion,
+                AutorId = libroDto.AutorId ?? 0
+            };
+
             _context.Libros.Add(libro);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetLibro), new { id = libro.Id }, libro);
+            return CreatedAtAction(nameof(GetLibro), new { id = libro.Id }, libroDto);
         }
 
-
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLibro(int id, Libro libro)
+        public async Task<IActionResult> PutLibro(int id, LibroDto libroDto)
         {
-            if (id != libro.Id)
+            var libroDb = await _context.Libros.FindAsync(id);
+            if (libroDb == null)
             {
-                return BadRequest(new { mensaje = "El ID del parámetro no coincide con el del cuerpo." });
+                return NotFound(new { mensaje = "El libro a actualizar no existe." });
             }
 
-            _context.Entry(libro).State = EntityState.Modified;
-
-            try
+            var autorExiste = await _context.Autores.AnyAsync(a => a.Id == libroDto.AutorId);
+            if (!autorExiste)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Libros.Any(e => e.Id == id))
-                {
-                    return NotFound(new { mensaje = "El libro a actualizar ya no existe." });
-                }
-                throw;
+                return BadRequest(new { mensaje = "El AutorId proporcionado no existe." });
             }
 
+            libroDb.Titulo = libroDto.Titulo;
+            libroDb.AnioPublicacion = libroDto.AnioPublicacion;
+            libroDb.AutorId = libroDto.AutorId ?? 0;
+
+            await _context.SaveChangesAsync();
             return NoContent();
         }
 
+        // 5. DELETE - Impecable, estaba muy bien estructurado
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLibro(int id)
         {

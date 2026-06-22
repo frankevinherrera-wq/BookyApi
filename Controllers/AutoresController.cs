@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookfyApi.Data;  
 using BookfyApi.Models; 
-
+using BookfyApi.DTOs;
 namespace BookfyApi.Controllers;
 
 [ApiController]
@@ -17,10 +17,15 @@ public class AutoresController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Autor>>> GetAutores()
+    public async Task<ActionResult<IEnumerable<AutorDto>>> GetAutores()
     {
-
-        return await _context.Autores.ToListAsync();
+        return await _context.Autores
+            .Select(autor => new AutorDto
+            {
+                Nombre = autor.Nombre,
+                Nacionalidad = autor.Nacionalidad
+            })
+            .ToListAsync();
     }
 
     [HttpGet("{id}")]

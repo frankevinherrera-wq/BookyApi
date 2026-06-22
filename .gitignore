@@ -71,6 +71,8 @@ artifacts/
 # Tye
 .tye/
 
+BookfyApi.http
+
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
 

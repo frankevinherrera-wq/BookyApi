@@ -1,8 +1,32 @@
 @BookfyApi_HostAddress = http://localhost:5187
 
-GET {{BookfyApi_HostAddress}}/weatherforecast/
-Accept: application/json
+
 
 ###
 GET {{BookfyApi_HostAddress}}/api/autores
 Accept: application/json
+
+###
+
+
+POST {{BookfyApi_HostAddress}}/api/autores
+Content-Type: application/json
+
+{
+    "Nombre": "Gabriel ",
+    "Nacionalidad": "Colombiana"
+}
+
+###
+GET {{BookfyApi_HostAddress}}/api/libros
+Accept: application/json
+
+###
+POST {{BookfyApi_HostAddress}}/api/libros
+Content-Type: application/json
+
+{
+    "titulo": "El Aleph",
+    "anioPublicacion": 1850,
+    "autorId": 1
+}
