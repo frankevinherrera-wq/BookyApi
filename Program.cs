@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BookfyApi.Data;
-
+using BookfyApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite("Data Source=bookfy.db") );
 
 builder.Services.AddControllers();
-
+builder.Services.AddScoped<IAutorService, AutorService>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
