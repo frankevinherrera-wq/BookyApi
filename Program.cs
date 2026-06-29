@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using BookfyApi.Data;
 using BookfyApi.Services;
 
+using BookfyApi.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -13,7 +14,7 @@ builder.Services.AddScoped<IAutorService, AutorService>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
+app.UseMiddleware<ExceptionMiddleware>(); 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
