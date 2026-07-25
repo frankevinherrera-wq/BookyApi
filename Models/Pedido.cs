@@ -7,9 +7,7 @@ namespace BookfyApi.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public int UsuarioId { get; set; }
-        [ForeignKey("Usuario")]
         public Usuario? Usuario { get; set; }
 
         public DateTime FechaPedido { get; set; }
