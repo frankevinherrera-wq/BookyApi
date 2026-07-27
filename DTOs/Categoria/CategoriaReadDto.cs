@@ -1,4 +1,4 @@
-namespace BookfyApi.DTOs
+namespace BookfyApi.DTOs.Categoria
 {
     public class CategoriaReadDto
     {

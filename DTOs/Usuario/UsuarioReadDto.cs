@@ -1,7 +1,7 @@
 
+namespace BookfyApi.DTOs.Usuario;
 
-
-public class UsuarioDto
+public class UsuarioReadDto
 {
     public int Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
