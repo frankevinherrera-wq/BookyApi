@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BookfyApi.DTOs
+namespace BookfyApi.DTOs.Libros
 {
     public class LibroCreateDto
     {
