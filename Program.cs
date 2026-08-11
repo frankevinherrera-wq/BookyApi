@@ -14,6 +14,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IAutorService , AutorService>();
+
+builder.Services.AddScoped<ILibroService, LibroService>();
+
+
+
+
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>(); 
 if (app.Environment.IsDevelopment())

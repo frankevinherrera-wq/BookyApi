@@ -15,7 +15,7 @@ public interface ILibroService
 
 
 
-     Task<IEnumerable<LibroReadDto>> GetByCategoriaAsync(int categoriaId); 
+    Task<IEnumerable<LibroReadDto>> GetByCategoriaAsync(int categoriaId); 
     Task<IEnumerable<LibroReadDto>> GetByAutorAsync(int autorId);         
     Task<IEnumerable<LibroReadDto>> SearchByTituloAsync(string titulo);  
 }

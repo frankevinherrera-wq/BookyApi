@@ -6,5 +6,51 @@
 GET {{BookfyApi_HostAddress}}/api/Categorias
 Accept: application/json
 
+
+###
+POST {{BookfyApi_HostAddress}}/api/Categorias
+Content-Type: application/json
+
+{
+  "nombre": "Ficción"
+}
+
+
+###
+GET {{BookfyApi_HostAddress}}/api/Autores
+
+
+
+### Crear un nuevo Autor
+POST {{BookfyApi_HostAddress}}/api/Autores
+Content-Type: application/json
+
+{
+  "nombre": "Gabriel García Márquez",
+  "nacionalidad": "Colombiana"
+}
+
 ###
 
+DELETE  {{BookfyApi_HostAddress}}/api/Autores/1
+Accept: application/json
+
+
+
+###
+
+GET {{BookfyApi_HostAddress}}/api/Libros
+
+
+
+###
+
+POST {{BookfyApi_HostAddress}}/api/Libros
+Content-Type: application/json
+
+{
+  "titulo": "Cien Años de Soledad",
+  "anioPublicacion": 1967,
+  "autorId": 2,
+  "categoriaId": 5
+}
