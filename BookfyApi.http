@@ -12,8 +12,9 @@ POST {{BookfyApi_HostAddress}}/api/Categorias
 Content-Type: application/json
 
 {
-  "nombre": "Ficción"
+  "nombre": "Categoría {{$randomInt 100 999}}"
 }
+
 
 
 ###
@@ -40,6 +41,7 @@ Accept: application/json
 ###
 
 GET {{BookfyApi_HostAddress}}/api/Libros
+Accept: application/json
 
 
 
@@ -49,8 +51,13 @@ POST {{BookfyApi_HostAddress}}/api/Libros
 Content-Type: application/json
 
 {
-  "titulo": "Cien Años de Soledad",
+  "titulo": "Cien",
   "anioPublicacion": 1967,
   "autorId": 2,
-  "categoriaId": 5
+  "categoriaId": 1
 }
+
+
+###
+GET {{BookfyApi_HostAddress}}/api/Libros/buscar?titulo=Cien%20Años%20de%20Soledad
+Accept: application/json

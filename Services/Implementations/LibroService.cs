@@ -39,23 +39,20 @@ namespace BookfyApi.Services.Implementations
 
         public async Task<LibroReadDto?> GetByIdAsync(int id)
         {
-            var libro = await _context.Libros.FindAsync(id);
-            if (libro == null) return null;
-
-            else
+            return await _context.Libros
+            .AsNoTracking()
+            .Where(l => l.Id == id)
+            .Select(l => new LibroReadDto
             {
-                var libroDto = new LibroReadDto
-                {
-                    Id = libro.Id,
-                    Titulo = libro.Titulo,
-                    AnioPublicacion = libro.AnioPublicacion,
-                    AutorId = libro.AutorId,
-                    AutorNombre = (await _context.Autores.FindAsync(libro.AutorId))?.Nombre ?? string.Empty,
-                    CategoriaId = libro.CategoriaId,
-                    CategoriaNombre = (await _context.Categorias.FindAsync(libro.CategoriaId))?.Nombre ?? string.Empty
-                };
-                return libroDto;
-            }
+                Id = l.Id,
+                Titulo = l.Titulo,
+                AnioPublicacion = l.AnioPublicacion,
+                AutorId = l.AutorId,
+                AutorNombre = l.Autor!.Nombre,
+                CategoriaId = l.CategoriaId,
+                CategoriaNombre = l.Categoria!.Nombre
+            })
+            .FirstOrDefaultAsync();
         }
 
 
@@ -109,7 +106,6 @@ namespace BookfyApi.Services.Implementations
                 throw new ArgumentException($"No se encontró una categoría con el ID {update.CategoriaId}.");
             }
 
-            if (libro == null) return false;
             libro.Titulo = update.Titulo;
             libro.AnioPublicacion = update.AnioPublicacion;
             libro.AutorId = update.AutorId;
@@ -175,7 +171,7 @@ namespace BookfyApi.Services.Implementations
          public async Task<IEnumerable<LibroReadDto>> SearchByTituloAsync(string titulo)        {
             return await _context.Libros
             .AsNoTracking()
-            .Where(l => l.Titulo == titulo) 
+            .Where(l => l.Titulo.Contains(titulo)) 
             .Select(l => new LibroReadDto
             {
                 Id = l.Id,
