@@ -3,30 +3,61 @@
 
 
 ###
-GET {{BookfyApi_HostAddress}}/api/autores
+GET {{BookfyApi_HostAddress}}/api/Categorias
 Accept: application/json
 
+
 ###
-
-
-POST {{BookfyApi_HostAddress}}/api/autores
+POST {{BookfyApi_HostAddress}}/api/Categorias
 Content-Type: application/json
 
 {
-    "Nombre": "Gabriel ",
-    "Nacionalidad": "Colombiana"
+  "nombre": "Categoría {{$randomInt 100 999}}"
 }
 
-###
-GET {{BookfyApi_HostAddress}}/api/libros
-Accept: application/json
+
 
 ###
-POST {{BookfyApi_HostAddress}}/api/libros
+GET {{BookfyApi_HostAddress}}/api/Autores
+
+
+
+### Crear un nuevo Autor
+POST {{BookfyApi_HostAddress}}/api/Autores
 Content-Type: application/json
 
 {
-    "titulo": "El Aleph",
-    "anioPublicacion": 1850,
-    "autorId": 1
+  "nombre": "Gabriel García Márquez",
+  "nacionalidad": "Colombiana"
 }
+
+###
+
+DELETE  {{BookfyApi_HostAddress}}/api/Autores/1
+Accept: application/json
+
+
+
+###
+
+GET {{BookfyApi_HostAddress}}/api/Libros
+Accept: application/json
+
+
+
+###
+
+POST {{BookfyApi_HostAddress}}/api/Libros
+Content-Type: application/json
+
+{
+  "titulo": "Cien",
+  "anioPublicacion": 1967,
+  "autorId": 2,
+  "categoriaId": 1
+}
+
+
+###
+GET {{BookfyApi_HostAddress}}/api/Libros/buscar?titulo=Cien%20Años%20de%20Soledad
+Accept: application/json

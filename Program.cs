@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using BookfyApi.Data;
-using BookfyApi.Services;
+using BookfyApi.Services.Interfaces;
+using BookfyApi.Services.Implementations;
+
 
 using BookfyApi.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
@@ -10,18 +12,23 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite("Data Source=bookfy.db") );
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IAutorService, AutorService>();
-builder.Services.AddOpenApi();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IAutorService , AutorService>();
+
+builder.Services.AddScoped<ILibroService, LibroService>();
+
+
+
 
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>(); 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+
+
 app.MapControllers();
 
 
