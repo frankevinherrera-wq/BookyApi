@@ -13,6 +13,9 @@ namespace BookfyApi.DTOs.Libros
         [Range(1000, 2100, ErrorMessage = "Ingrese un año de publicación válido.")]
         public int AnioPublicacion { get; set; }
 
+        [Required(ErrorMessage = "Debe especificar el precio")]
+        public decimal Precio {get;set;}
+
         [Required(ErrorMessage = "Debe especificar un autor.")]
         [Range(1, int.MaxValue, ErrorMessage = "Seleccione un AutorId válido.")]
         public int AutorId { get; set; }

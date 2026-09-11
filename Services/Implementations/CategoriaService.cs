@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using BookfyApi.Data;
-using BookfyApi.Models;
 using BookfyApi.DTOs.Categoria;
 using BookfyApi.Services.Interfaces;
-
+using BookfyApi.Models;
 
 namespace BookfyApi.Services.Implementations;
 
