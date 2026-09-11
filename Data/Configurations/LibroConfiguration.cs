@@ -19,7 +19,8 @@ public class LibroConfiguration : IEntityTypeConfiguration<Libro>
         builder.Property(l => l.AnioPublicacion)
         .IsRequired();
     
-       
+       builder.Property(l => l.Precio)
+        .IsRequired();
 
         builder.HasOne(l => l.Autor)
             .WithMany(a => a.Libros)

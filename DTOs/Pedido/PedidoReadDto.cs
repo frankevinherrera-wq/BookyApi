@@ -1,5 +1,4 @@
-using BookfyApi.DTOs.DetallePedido;
-
+using BookfyApi.DTOs.DetallesPedidos;
 namespace BookfyApi.DTOs.Pedido
 {
     public class PedidoReadDto
@@ -10,7 +9,6 @@ namespace BookfyApi.DTOs.Pedido
         public DateTime FechaPedido { get; set; }
         public decimal Total { get; set; }
 
-        // Incluimos los detalles mapeados con su respectivo DTO
-        public List<DetallePedidoReadDto> Detalles { get; set; } = new();
+        public ICollection<DetallePedidoReadDto> DetallesPedidos { get; set; } = new List<DetallePedidoReadDto>();
     }
 }

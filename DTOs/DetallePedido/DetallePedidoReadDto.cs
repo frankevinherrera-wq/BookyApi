@@ -1,7 +1,7 @@
 
 
 
-namespace BookfyApi.DTOs.DetallePedido{
+namespace BookfyApi.DTOs.DetallesPedidos{
     public class DetallePedidoReadDto
     {
         public int Id { get; set; }

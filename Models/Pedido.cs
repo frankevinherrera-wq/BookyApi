@@ -10,8 +10,12 @@ namespace BookfyApi.Models
         public int UsuarioId { get; set; }
         public Usuario? Usuario { get; set; }
 
+
         public DateTime FechaPedido { get; set; }
+        
         public decimal Total { get; set; }
+        
+        public string Estado { get; set; } = "Pendiente";
         public ICollection<DetallePedido>? DetallesPedidos { get; set; }
 
     }

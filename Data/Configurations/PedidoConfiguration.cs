@@ -11,6 +11,8 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
     {
         builder.HasKey(p => p.Id);
 
+
+
         builder.HasOne(p => p.Usuario)
             .WithMany(u => u.Pedidos)
             .HasForeignKey(p => p.UsuarioId)
@@ -24,5 +26,9 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
             .IsRequired()
             .HasColumnType("decimal(18,2)")
             .HasDefaultValue(0);
+
+        builder.Property(p => p.Estado)
+            .IsRequired();
+            
     }
 }

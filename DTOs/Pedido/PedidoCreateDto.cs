@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using BookfyApi.DTOs.DetallePedido;
+using BookfyApi.DTOs.DetallesPedidos;
 namespace BookfyApi.DTOs.Pedido
 {
     public class PedidoCreateDto
