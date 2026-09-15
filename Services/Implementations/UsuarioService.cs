@@ -49,7 +49,7 @@ public  class UsuarioService : IUsuarioService
     {
         return await _context.Usuarios
                 .AsNoTracking()
-                .Where(u => email == u.Email)
+                .Where(u => u.Email.ToLower() == email.ToLower())
                 .Select(u => new UsuarioReadDto{
                     Id = u.Id,
                     Nombre = u.Nombre,
@@ -102,6 +102,14 @@ public  class UsuarioService : IUsuarioService
         
         var usuario = await _context.Usuarios.FindAsync(id);
         if (usuario == null) return false;
+
+        bool emailEnUso = await _context.Usuarios
+        .AnyAsync(u => u.Email.ToLower() == dto.Email.ToLower() && u.Id != id);
+
+        if (emailEnUso)
+        {
+            throw new InvalidOperationException("El correo electrónico ya está registrado por otro usuario.");
+        }
 
         usuario.Nombre = dto.Nombre;
         usuario.Email = dto.Email;
