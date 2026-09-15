@@ -1,13 +1,13 @@
 using BookfyApi.DTOs.Pedido;
 using BookfyApi.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using Microsoft.AspNetCore.Authorization;
 namespace BookfyApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    // [Authorize] // Nota: Si aún no has configurado JWT en Program.cs, puedes dejarlo comentado para probar libremente
     public class PedidosController : ControllerBase
     {
         private readonly IPedidoService _pedidoService;
@@ -17,15 +17,16 @@ namespace BookfyApi.Controllers
             _pedidoService = pedidoService;
         }
 
-        // GET: api/pedidos
+        // GET: api/pedidos (Solo Administrador)
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<PedidoReadDto>>> GetAll()
         {
             var pedidos = await _pedidoService.GetAllAsync();
             return Ok(pedidos);
         }
 
-        // GET: api/pedidos/5
+        // GET: api/pedidos/5 (Obtener un pedido por su ID de Pedido)
         [HttpGet("{id:int}")]
         public async Task<ActionResult<PedidoReadDto>> GetById(int id)
         {
@@ -39,7 +40,7 @@ namespace BookfyApi.Controllers
             return Ok(pedido);
         }
 
-        // GET: api/pedidos/usuario/3
+        // GET: api/pedidos/usuario/3 (Obtener todos los pedidos de un Usuario)
         [HttpGet("usuario/{usuarioId:int}")]
         public async Task<ActionResult<IEnumerable<PedidoReadDto>>> GetByUsuarioId(int usuarioId)
         {
@@ -47,7 +48,7 @@ namespace BookfyApi.Controllers
             return Ok(pedidos);
         }
 
-        // POST: api/pedidos
+        // POST: api/pedidos (Crear un pedido)
         [HttpPost]
         public async Task<ActionResult<PedidoReadDto>> Create([FromBody] PedidoCreateDto dto)
         {
@@ -60,7 +61,7 @@ namespace BookfyApi.Controllers
             {
                 var nuevoPedido = await _pedidoService.CreateAsync(dto);
 
-                // Devuelve HTTP 201 Created con el encabezado Location -> GET api/pedidos/{id}
+                // Devuelve HTTP 201 Created apontando a GET api/pedidos/{id}
                 return CreatedAtAction(
                     nameof(GetById), 
                     new { id = nuevoPedido.Id }, 
@@ -69,7 +70,6 @@ namespace BookfyApi.Controllers
             }
             catch (KeyNotFoundException ex)
             {
-                // En caso de que un LibroId enviado no exista en la base de datos
                 return BadRequest(new { mensaje = ex.Message });
             }
             catch (Exception ex)
@@ -78,8 +78,9 @@ namespace BookfyApi.Controllers
             }
         }
 
-        // PATCH: api/pedidos/5/estado
+        // PATCH: api/pedidos/5/estado (Solo Administrador)
         [HttpPatch("{id:int}/estado")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateEstado(int id, [FromBody] PedidoUpdateEstadoAdminDto dto)
         {
             if (!ModelState.IsValid)
@@ -94,7 +95,7 @@ namespace BookfyApi.Controllers
                 return NotFound(new { mensaje = $"No se pudo actualizar. No existe el pedido con ID {id}." });
             }
 
-            return NoContent(); // HTTP 204: Cambio exitoso sin contenido que devolver
+            return NoContent();
         }
     }
 }
