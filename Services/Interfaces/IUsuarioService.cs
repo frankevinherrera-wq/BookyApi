@@ -15,6 +15,5 @@ namespace BookfyApi.Services.Interfaces
 
         Task<UsuarioReadDto> CreateAsync(UsuarioCreateDto dto);
         Task<bool> UpdateAsync(int id, UsuarioUpdateDto dto);
-        Task<bool> DeleteAsync(int id);
     }
 }
