@@ -1,20 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+<PropertyGroup>
+<TargetFramework>net10.0</TargetFramework>
+<Nullable>enable</Nullable>
+<ImplicitUsings>enable</ImplicitUsings>
+<UserSecretsId>31287292-db22-4cc1-ab64-8bb61dfa6afd</UserSecretsId>
+</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.9" />
-  </ItemGroup>
+<ItemGroup>
+<PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+<PackageReference Include="Google.Apis.Auth" Version="1.76.0" />
+<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.9" />
+<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.6" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
+<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+<PrivateAssets>all</PrivateAssets>
+</PackageReference>
+<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.9" />
+<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.22.0" />
+</ItemGroup>
 
 </Project>
