@@ -79,7 +79,8 @@ public  class UsuarioService : IUsuarioService
             Nombre = dto.Nombre,
             Email = dto.Email, 
             Contrasena = passwordHash,
-            FechaRegistro = DateTime.UtcNow
+            FechaRegistro = DateTime.UtcNow,
+            Rol = "Cliente"
 
         };
 

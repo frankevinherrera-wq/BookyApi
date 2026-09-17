@@ -5,7 +5,7 @@ using BookfyApi.Models;
 using BookfyApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookfyApi.Services
+namespace BookfyApi.Services.Implementations
 {
     public class PedidoService : IPedidoService
     {
