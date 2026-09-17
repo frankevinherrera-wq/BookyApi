@@ -5,6 +5,7 @@ using BookfyApi.Services.Implementations;
 
 
 using BookfyApi.Middlewares;
+using BookfyApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -17,7 +18,7 @@ builder.Services.AddScoped<IAutorService , AutorService>();
 
 builder.Services.AddScoped<ILibroService, LibroService>();
 
-
+builder.Services.AddScoped<IPedidoService , PedidoService>();
 
 
 var app = builder.Build();

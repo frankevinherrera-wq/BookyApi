@@ -61,3 +61,8 @@ Content-Type: application/json
 ###
 GET {{BookfyApi_HostAddress}}/api/Libros/buscar?titulo=Cien%20Años%20de%20Soledad
 Accept: application/json
+
+
+###
+GET {{BookfyApi_HostAddress}}/api/usuario/3
+Accept: application/json

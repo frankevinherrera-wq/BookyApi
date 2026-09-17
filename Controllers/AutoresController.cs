@@ -12,9 +12,11 @@ namespace BookfyApi.Controllers;
 public class AutoresController : ControllerBase
 {
     private readonly IAutorService _autorService;
-    public AutoresController(IAutorService autorService)
+    private readonly ILogger<AutoresController> _logger;
+    public AutoresController(IAutorService autorService, ILogger<AutoresController> logger)
     {
         _autorService = autorService;
+        _logger = logger;
     }
 
 
@@ -22,6 +24,8 @@ public class AutoresController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var autores = await _autorService.GetAllAsync();
+
+        _logger.LogInformation("bien echo papu");
 
         return Ok(autores);
     }
