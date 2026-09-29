@@ -66,3 +66,8 @@ Accept: application/json
 ###
 GET {{BookfyApi_HostAddress}}/api/usuario/3
 Accept: application/json
+
+
+
+###
+GET {{BookfyApi_HostAddress}}/api//3

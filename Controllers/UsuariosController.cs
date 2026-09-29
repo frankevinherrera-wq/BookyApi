@@ -71,7 +71,6 @@ namespace BookfyApi.Controllers
             return Ok(usuario);
         }
 
-        // GET: api/usuarios/buscar?email=ejemplo@correo.com (Solo Administrador)
         [HttpGet("buscar")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<UsuarioReadDto>> GetByEmail([FromQuery] string email)

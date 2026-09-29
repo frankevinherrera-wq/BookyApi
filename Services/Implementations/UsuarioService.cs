@@ -6,7 +6,7 @@ using BookfyApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;
 
-namespace BookfyApi.Services;
+namespace  BookfyApi.Services.Implementations;
 
 public  class UsuarioService : IUsuarioService
 {
@@ -20,7 +20,7 @@ public  class UsuarioService : IUsuarioService
     public async Task<IEnumerable<UsuarioReadDto>> GetAllAsync()
     {
         return await _context.Usuarios
-                .AsNoTracking() //aumenta velocidad en consulta porque no rasrtrea para cambios 
+                .AsNoTracking() 
                 .Select(u => new UsuarioReadDto
                 {
                     Id = u.Id,
