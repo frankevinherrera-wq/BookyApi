@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BookfyApi/BookfyApi.csproj" />
+  <Project Path="MiBook.Tests/MiBook.Tests.csproj" />
+</Solution>
