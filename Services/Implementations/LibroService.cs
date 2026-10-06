@@ -27,6 +27,7 @@ namespace BookfyApi.Services.Implementations
                 Id = l.Id,
                 Titulo = l.Titulo,
                 AnioPublicacion = l.AnioPublicacion,
+                Precio = l.Precio,
 
 
                 AutorId = l.AutorId,
