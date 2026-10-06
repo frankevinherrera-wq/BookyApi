@@ -22,7 +22,7 @@ permissions:
 
 # AI engine to use for this workflow
 engine: copilot
-model: gpt-5.6
+model: auto
 
 # Tools - GitHub API access via toolsets (context, repos, issues, pull_requests)
 # tools:
