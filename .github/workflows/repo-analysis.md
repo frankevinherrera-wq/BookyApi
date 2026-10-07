@@ -128,17 +128,26 @@ Describe what you want the AI to do when this workflow runs.
 
 ## Instructions
 
-Analiza este repositorio y genera un resumen técnico.
+Analiza cómo implementar una nueva funcionalidad en BookfyApi.
 
-Debes:
+### Tarea
 
-1. Identificar la estructura principal del repositorio.
-2. Identificar la arquitectura de BookfyApi.
-3. Identificar dónde están los tests.
-4. Identificar los workflows de GitHub Actions y Agentic Workflows.
-5. Explicar brevemente cómo se relacionan estos componentes.
+Queremos agregar un endpoint HTTP que permita obtener los libros filtrados por categoría.
 
-Restricciones:
+### Debes
+
+1. Revisar las reglas del proyecto en `AGENTS.md`.
+2. Identificar la Skill relacionada con endpoints de API.
+3. Identificar el Controller correspondiente.
+4. Identificar el Service correspondiente.
+5. Identificar los DTOs involucrados.
+6. Identificar cómo están implementados actualmente los endpoints similares.
+7. Identificar los tests existentes relacionados.
+8. Proponer qué archivos deberían modificarse.
+9. Explicar brevemente qué cambios habría que realizar en cada archivo.
+10. Proponer qué tests deberían agregarse o modificarse.
+
+### Restricciones
 
 - Solo lectura.
 - No modifiques ningún archivo.
@@ -146,9 +155,20 @@ Restricciones:
 - No crees Pull Requests.
 - No crees Issues.
 - No elimines archivos.
-- No ejecutes acciones destructivas.
+- No cambies la arquitectura existente.
+- No inventes archivos o clases que no existan.
+- Si falta información, indícalo explícitamente.
 
-Devuelve el resultado como un informe organizado por secciones.
+### Resultado
+
+Devuelve un informe organizado en:
+
+1. Reglas aplicables
+2. Archivos relevantes
+3. Análisis de la implementación actual
+4. Propuesta de cambios
+5. Tests necesarios
+6. Riesgos o dudas
 
 ## Notes
 
