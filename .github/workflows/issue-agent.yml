@@ -1,0 +1,17 @@
+name: Issue Agent
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Confirmar Issue
+        run: |
+          echo "Se abrió un Issue."
+          echo "Número: ${{ github.event.issue.number }}"
+          echo "Título: ${{ github.event.issue.title }}"
+          echo "Descripción: ${{ github.event.issue.body }}"

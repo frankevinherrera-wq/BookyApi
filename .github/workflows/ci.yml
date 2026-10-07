@@ -1,16 +1,27 @@
-name: Issue Agent
+name: CI
 
 on:
-  issues:
-    types: [opened]
+  push:
+  pull_request:
 
 jobs:
-  agent:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Confirmar Issue
-        run: |
-          echo "Se abrió un Issue."
-          echo "Número: ${{ github.event.issue.number }}"
-          echo "Título: ${{ github.event.issue.title }}"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore Bookfy.slnx
+
+      - name: Build
+        run: dotnet build Bookfy.slnx --no-restore
+
+      - name: Test
+        run: dotnet test MiBook.Tests/MiBook.Tests.csproj --no-build --no-restore
