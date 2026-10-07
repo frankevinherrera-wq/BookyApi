@@ -9,7 +9,7 @@ permissions:
   pull-requests: read
 engine:
   id: copilot
-  model: gpt-5-mini
+  model: copilot/gpt-5-mini
 
 network: defaults
 ---
